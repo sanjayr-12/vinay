@@ -15,4 +15,4 @@ const verifyCredential = async (token: string) => {
   }
 };
 
-export default verifyCredential
+export default verifyCredential;
