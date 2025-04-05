@@ -5,6 +5,7 @@ export class AuthService {
   async authUp(token: string, roles: string[]) {
     const payload = await verifyCredential(token);
     if (payload == undefined) return [false, "error in sign in"];
+    if (!payload.email_verified) return [false, "email is not verified"];
     const newUser = {
       name: payload.name ? payload.name : "",
       email: payload.email ? payload.email : "",
