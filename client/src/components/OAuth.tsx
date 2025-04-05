@@ -1,12 +1,15 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { loginAPI } from "../apis/apiStore";
+import { useNavigate } from "react-router-dom";
 
 const Oauth = () => {
+  const navigate = useNavigate();
   const handleLogin = async (token: string) => {
     try {
-      const response = await loginAPI(token);
-      console.log(response.data);
+      await loginAPI(token);
+      navigate("/");
     } catch (error) {
+      navigate("/login");
       console.log(error);
     }
   };
