@@ -54,3 +54,16 @@ export const verifyAuthController = async (req: Request, res: Response) => {
     res.status(503).json({ status: "error", message: error.message });
   }
 };
+
+export const logoutController = async (req: Request, res: Response) => {
+  try {
+    await authService.logout(res);
+    res.status(200).json({ status: "ok", message: "Logged out" });
+    return;
+  } catch (error: any) {
+    res
+      .status(503)
+      .json({ status: "error", message: "server error " + error.message });
+    return;
+  }
+};

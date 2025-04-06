@@ -8,14 +8,14 @@ export const protectRoutes = (
 ) => {
   const token = req.cookies.token;
   if (!token) {
-    return res
-      .status(401)
-      .json({ status: "error", error: "No token provided" });
+    res.status(401).json({ status: "error", error: "No token provided" });
+    return;
   }
   if (!process.env.JWT_SECRET) {
-    return res
+    res
       .status(503)
       .json({ status: "error", error: "Server error: JWT_SECRET not set" });
+    return;
   }
   try {
     const verify = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
@@ -23,6 +23,7 @@ export const protectRoutes = (
     (req as Request & { roles?: string[] }).roles = verify.roles;
     next();
   } catch (error) {
-    return res.status(403).json({ status: "error", error: "Invalid token" });
+    res.status(403).json({ status: "error", error: "Invalid token" });
+    return;
   }
 };

@@ -28,4 +28,9 @@ export class AuthService {
     }
     return [true, userData];
   }
+
+  async logout(res: any) {
+    res.cookie("token", "", { maxAge: 0 });
+    return true;
+  }
 }
