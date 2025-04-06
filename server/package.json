@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.ts",
-    "build": "tsc && tsc-alias",
-    "start": "npm run build && cd ../client && npm install && npm run build && cd.. && cd server && node dist/index.js"
+    "build": "npx tsc && cd ../client && npm install && npm run build",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
