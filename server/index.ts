@@ -15,12 +15,12 @@ app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../../client/dist")));
 
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/dist", "index.html"));
 });
-
-app.use("/api/auth", authRouter);
-app.use("/api/user", userRouter);
 
 app.listen(process.env.PORT, async () => {
   await connectDB();

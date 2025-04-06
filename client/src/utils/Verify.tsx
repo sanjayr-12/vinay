@@ -17,6 +17,7 @@ const Verify = () => {
         console.log(response);
         setUser(response.userData);
         navigate("/");
+        setLoading(false)
       } catch (error) {
         console.log(error);
         navigate("/login");
