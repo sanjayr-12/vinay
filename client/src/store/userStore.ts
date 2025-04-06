@@ -5,5 +5,7 @@ import type { userStore } from "../types/store.types";
 export const useUserStore = create<userStore>()((set) => ({
   user: undefined,
   setUser: (u: User) =>
-    set({ user: { name: u.name, imageUrl: u.imageUrl, roles: u.roles } }),
+    set({
+      user: { name: u.name, imageUrl: u.imageUrl, roles: u.roles },
+    }),
 }));

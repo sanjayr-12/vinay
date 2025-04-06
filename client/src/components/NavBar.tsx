@@ -1,8 +1,23 @@
+import { logoutAPI } from "../apis/apiStore";
 import { useUserStore } from "../store/userStore";
 import { Roles } from "../types/store.types";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await logoutAPI();
+      setUser({ name: undefined, imageUrl: undefined, roles: [] });
+      navigate("/login", { replace: true });
+      console.log(response.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="navbar bg-base-100">
@@ -20,14 +35,30 @@ const NavBar = () => {
             <p>{user?.name}</p>
           </li>
         </ul>
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar"
-        >
-          <div className="w-10 rounded-full">
-            <img alt="user profile image" src={user?.imageUrl} />
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img alt="User profile" src={user?.imageUrl} />
+            </div>
           </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <a className="justify-between">Profile</a>
+            </li>
+            {/* <li>
+              <a>Settings</a>
+            </li> */}
+            <li onClick={handleLogout}>
+              <a>Logout</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
