@@ -7,6 +7,10 @@ export const imageSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    imageName: {
+      type: String,
+      requried: true
+    },
     visibility: {
       type: String,
       enum: ["PUBLIC", "PRIVATE"],
@@ -17,7 +21,7 @@ export const imageSchema = new mongoose.Schema(
       ref: "User",
     },
     isAI: {
-      type: boolean,
+      type: Boolean,
       required: true,
     },
   },
