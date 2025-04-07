@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { verifyAPI } from "../apis/apiStore";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../store/Store";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const Verify = () => {
@@ -14,10 +14,8 @@ const Verify = () => {
       try {
         setLoading(true);
         const response = await verifyAPI();
-        console.log(response);
         setUser(response.userData);
         navigate("/");
-        setLoading(false)
       } catch (error) {
         console.log(error);
         navigate("/login");

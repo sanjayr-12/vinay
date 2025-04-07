@@ -21,3 +21,19 @@ export const logoutAPI = async () => {
   });
   return response.data;
 };
+
+export const imageUpload = async (imageBase64: string, name: string) => {
+  const response = await axios.post(
+    "/api/user/upload-img",
+    { imageBase64, imageName: name },
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const getImages = async () => {
+  const response = await axios.get("/api/user/get-imgs", { withCredentials: true })
+  return response.data
+}

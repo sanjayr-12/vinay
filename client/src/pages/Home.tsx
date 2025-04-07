@@ -1,6 +1,6 @@
 import Body from "../components/Body";
 import NavBar from "../components/NavBar";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../store/Store";
 
 const Home = () => {
   const user = useUserStore((state) => state.user);
