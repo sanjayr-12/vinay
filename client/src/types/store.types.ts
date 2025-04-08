@@ -3,6 +3,7 @@ export enum Roles {
   ADMIN = "ADMIN",
 }
 export type User = {
+  _id: string | undefined;
   name: string | undefined;
   imageUrl: string | undefined;
   roles: Roles[];
@@ -21,9 +22,9 @@ export type Image = {
   reRender: () => void;
 };
 
-
 export type ImageType = {
+  _id: string;
   url: string;
-  uploadedBy: { name: string };
+  uploadedBy: { _id: string; name: string };
   imageName: string;
-}
+};

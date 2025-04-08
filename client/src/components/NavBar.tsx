@@ -12,7 +12,7 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       const response = await logoutAPI();
-      setUser({ name: undefined, imageUrl: undefined, roles: [] });
+      setUser({ _id: undefined, name: undefined, imageUrl: undefined, roles: [] });
       navigate("/login", { replace: true });
       console.log(response.message);
     } catch (error) {

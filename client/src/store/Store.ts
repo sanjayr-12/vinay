@@ -6,7 +6,7 @@ export const useUserStore = create<userStore>()((set) => ({
   user: undefined,
   setUser: (u: User) =>
     set({
-      user: { name: u.name, imageUrl: u.imageUrl, roles: u.roles },
+      user: {_id:u._id, name: u.name, imageUrl: u.imageUrl, roles: u.roles },
     }),
 }));
 
