@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Upload = () => {
   const reRender = useImageStore((state) => state.reRender);
-  const formRef = useRef<HTMLFormElement>(null)
+  const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const handleImageUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,8 +25,8 @@ const Upload = () => {
         const result = await imageUpload(base64String, imageName);
         setLoading(false);
         reRender();
-        toast.success(result.message)
-        formRef.current?.reset()
+        toast.success(result.message);
+        formRef.current?.reset();
       };
 
       reader.readAsDataURL(file);
@@ -60,9 +60,6 @@ const Upload = () => {
               required
             />
             <div className="modal-action justify-end gap-4">
-              <button type="submit" className="btn" disabled={loading}>
-                {loading ? "uploading..." : "Submit"}
-              </button>
               <button
                 type="button"
                 className="btn"
@@ -73,6 +70,9 @@ const Upload = () => {
                 }
               >
                 Close
+              </button>
+              <button type="submit" className="btn" disabled={loading}>
+                {loading ? "uploading..." : "Submit"}
               </button>
             </div>
           </form>
