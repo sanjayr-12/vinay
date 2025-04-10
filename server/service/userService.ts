@@ -1,11 +1,12 @@
 import { imageModel } from "../models/models";
-import { imageUpload } from "../utils/img.upload";
+import { deleteImage, imageUpload } from "../utils/handle.img";
 
 export class UserService {
   async imageUpload(base64String: string, imageName: string, userId: string) {
-    let url = await imageUpload(base64String);
+    let [url, public_id] = await imageUpload(base64String);
     let newImage = {
       url,
+      public_id,
       imageName,
       visibility: "PUBLIC",
       uploadedBy: userId,
@@ -23,5 +24,12 @@ export class UserService {
       .exec();
 
     return imageData;
+  }
+
+  async deleteImage(docId: string, public_id: string) {
+    const result = await deleteImage(public_id);
+    if (!result) return false;
+    await imageModel.findByIdAndDelete(docId);
+    return true;
   }
 }

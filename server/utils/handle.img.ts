@@ -1,11 +1,10 @@
 import { v2 as cloudinary } from "cloudinary";
-
+const options = {
+  use_fileName: true,
+  unique_fileName: false,
+  overwrite: true,
+};
 export const imageUpload = async (image64: string) => {
-  const options = {
-    use_fileName: true,
-    unique_fileName: false,
-    overwrite: true,
-  };
   try {
     const uploadResult = await cloudinary.uploader.upload(image64, options);
     const optimizeUrl = cloudinary.url(uploadResult.public_id, {
@@ -14,7 +13,16 @@ export const imageUpload = async (image64: string) => {
       width: 1200,
       height: 1200,
     });
-    return optimizeUrl;
+    return [optimizeUrl, uploadResult.public_id];
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteImage = async (public_id: string) => {
+  try {
+    await cloudinary.uploader.destroy(public_id);
+    return true;
   } catch (error) {
     throw error;
   }

@@ -7,9 +7,11 @@ import cookieParser from "cookie-parser";
 import configCloudinary from "./config/cloudinary";
 import userRouter from "./routes/user.routes";
 import path from "path";
+import utilRouter from "./utils/utils.routes";
+import { reStart } from "./utils/self.cron";
 
 const app = express();
-app.use(cors({ origin: process.env.ORIGIN }));
+// app.use(cors({ origin: process.env.ORIGIN }));
 dotenv.config();
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
@@ -17,6 +19,7 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/utils", utilRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/dist", "index.html"));
@@ -25,5 +28,6 @@ app.get("*", (req, res) => {
 app.listen(process.env.PORT, async () => {
   await connectDB();
   await configCloudinary();
+  reStart();
   console.log("server started and db connected");
 });
