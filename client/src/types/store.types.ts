@@ -25,6 +25,7 @@ export type Image = {
 export type ImageType = {
   _id: string;
   url: string;
+  public_id: string;
   uploadedBy: { _id: string; name: string };
   imageName: string;
 };

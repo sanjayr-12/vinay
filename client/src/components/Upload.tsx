@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { imageUpload } from "../apis/apiStore";
 import { useImageStore } from "../store/Store";
+import { useRef } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Upload = () => {
   const reRender = useImageStore((state) => state.reRender);
+  const formRef = useRef<HTMLFormElement>(null)
   const [loading, setLoading] = useState(false);
   const handleImageUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,53 +25,61 @@ const Upload = () => {
         const result = await imageUpload(base64String, imageName);
         setLoading(false);
         reRender();
-        console.log(result);
+        toast.success(result.message)
+        formRef.current?.reset()
       };
 
       reader.readAsDataURL(file);
     } else {
-      console.log("No file selected or file is not valid");
+      toast.error("No file selected or file is not valid");
     }
   };
 
   return (
-    <dialog id="my_modal_1" className="modal">
-      <div className="modal-box">
-        <form onSubmit={handleImageUpload} className="flex flex-col gap-4">
-          <p className="py-4 text-lg font-bold">Choose an image to upload</p>
-          <input
-            type="file"
-            accept="image/*"
-            className="file-input w-full max-w-xs"
-            name="img"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Name of the image"
-            className="input w-full max-w-xs"
-            name="imgName"
-            required
-          />
-          <div className="modal-action justify-end gap-4">
-            <button type="submit" className="btn" disabled={loading}>
-              {loading ? "uploading..." : "Submit"}
-            </button>
-            <button
-              type="button"
-              className="btn"
-              onClick={() =>
-                (
-                  document.getElementById("my_modal_1") as HTMLDialogElement
-                )?.close()
-              }
-            >
-              Close
-            </button>
-          </div>
-        </form>
-      </div>
-    </dialog>
+    <>
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <form
+            onSubmit={handleImageUpload}
+            ref={formRef}
+            className="flex flex-col gap-4"
+          >
+            <p className="py-4 text-lg font-bold">Choose an image to upload</p>
+            <input
+              type="file"
+              accept="image/*"
+              className="file-input w-full max-w-xs"
+              name="img"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Name of the image"
+              className="input w-full max-w-xs"
+              name="imgName"
+              required
+            />
+            <div className="modal-action justify-end gap-4">
+              <button type="submit" className="btn" disabled={loading}>
+                {loading ? "uploading..." : "Submit"}
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={() =>
+                  (
+                    document.getElementById("my_modal_1") as HTMLDialogElement
+                  )?.close()
+                }
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+        <Toaster />
+      </dialog>
+    </>
   );
 };
 

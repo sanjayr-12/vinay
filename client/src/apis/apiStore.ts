@@ -34,6 +34,17 @@ export const imageUpload = async (imageBase64: string, name: string) => {
 };
 
 export const getImages = async () => {
-  const response = await axios.get("/api/user/get-imgs", { withCredentials: true })
-  return response.data
-}
+  const response = await axios.get("/api/user/get-imgs", {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export const deleteImage = async (docId: string, public_id: string) => {
+  const response = await axios.post(
+    "/api/user/delete-img",
+    { docId, public_id },
+    { withCredentials: true }
+  );
+  return response.data;
+};
