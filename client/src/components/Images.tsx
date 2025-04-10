@@ -20,7 +20,6 @@ const Images = () => {
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
-        return <p>No images</p>;
       } else {
         toast.error("Something went wrong");
         return <p>No images</p>;
@@ -29,12 +28,15 @@ const Images = () => {
       setLoading(false);
     }
   };
-  if (images.length === 0) {
+  if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
         <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
+  }
+  if (images.length === 0) {
+    return <p>No images</p>
   }
   return (
     <>
