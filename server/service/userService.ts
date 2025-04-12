@@ -1,5 +1,6 @@
 import { imageModel } from "../models/models";
 import { deleteImage, imageUpload } from "../utils/handle.img";
+import { textToImage } from "../utils/TextToImage";
 
 export class UserService {
   async imageUpload(base64String: string, imageName: string, userId: string) {
@@ -31,5 +32,10 @@ export class UserService {
     if (!result) return false;
     await imageModel.findByIdAndDelete(docId);
     return true;
+  }
+
+  async generateAIImage(prompt:string) {
+    const result = await textToImage(prompt)
+    // console.log(result)
   }
 }

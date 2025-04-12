@@ -86,3 +86,29 @@ export const deleteImageController = async (
     return;
   }
 };
+
+export const generateAIImageController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    let requestSchema = Joi.object({
+      prompt: Joi.string().min(1).required(),
+    });
+
+    let { error } = requestSchema.validate(req.body);
+
+    if (error) {
+      res.status(406).json({ status: "error", message: error.message });
+      return;
+    }
+    await userService.generateAIImage(req.body.prompt);
+    res.status(200).json({ status: "ok", message: "success" });
+    return;
+  } catch (error: any) {
+    res
+      .status(503)
+      .json({ status: "error", message: "server error " + error.message });
+    return;
+  }
+};
