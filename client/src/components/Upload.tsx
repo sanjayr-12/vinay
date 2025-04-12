@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { imageUpload } from "../apis/apiStore";
-import { useImageStore } from "../store/Store";
+import UploadModel from "../models/UploadModel";
+import { useImageStore, useLoadingStore } from "../store/Store";
 import { useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const Upload = () => {
   const reRender = useImageStore((state) => state.reRender);
   const formRef = useRef<HTMLFormElement>(null);
-  const [loading, setLoading] = useState(false);
+  const setLoading = useLoadingStore((state)=>state.setUploadLoading)
   const handleImageUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -59,22 +59,7 @@ const Upload = () => {
               name="imgName"
               required
             />
-            <div className="modal-action justify-end gap-4">
-              <button
-                type="button"
-                className="btn"
-                onClick={() =>
-                  (
-                    document.getElementById("my_modal_1") as HTMLDialogElement
-                  )?.close()
-                }
-              >
-                Close
-              </button>
-              <button type="submit" className="btn" disabled={loading}>
-                {loading ? "uploading..." : "Submit"}
-              </button>
-            </div>
+            <UploadModel />
           </form>
         </div>
         <Toaster />

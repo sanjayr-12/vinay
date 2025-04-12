@@ -48,3 +48,12 @@ export const deleteImage = async (docId: string, public_id: string) => {
   );
   return response.data;
 };
+
+export const generateAIImage = async (prompt: string) => {
+  const response = await axios.post(
+    "/api/user/gen-img",
+    { prompt },
+    { withCredentials: true }
+  );
+  return response.data;
+};

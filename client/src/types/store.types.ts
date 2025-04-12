@@ -29,3 +29,8 @@ export type ImageType = {
   uploadedBy: { _id: string; name: string };
   imageName: string;
 };
+
+export type LoadingStore = {
+  uploadLoading: boolean;
+  setUploadLoading: (val:boolean) => void;
+};

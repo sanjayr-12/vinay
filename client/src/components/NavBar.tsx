@@ -3,6 +3,7 @@ import { useUserStore } from "../store/Store";
 import { Roles } from "../types/store.types";
 import { useNavigate } from "react-router-dom";
 import Upload from "./Upload";
+import Generate from "./Generate";
 
 const NavBar = () => {
   const user = useUserStore((state) => state.user);
@@ -12,7 +13,12 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       const response = await logoutAPI();
-      setUser({ _id: undefined, name: undefined, imageUrl: undefined, roles: [] });
+      setUser({
+        _id: undefined,
+        name: undefined,
+        imageUrl: undefined,
+        roles: [],
+      });
       navigate("/login", { replace: true });
       console.log(response.message);
     } catch (error) {
@@ -25,6 +31,11 @@ const NavBar = () => {
     modal?.showModal();
   };
 
+  const openGenerateModel = () => {
+    const model = document.getElementById("my_modal_2") as HTMLDialogElement;
+    model?.showModal();
+  };
+
   return (
     <>
       <div className="navbar bg-base-100">
@@ -33,6 +44,9 @@ const NavBar = () => {
         </div>
         <div className="flex-none items-end justify-end">
           <ul className="menu menu-horizontal px-1">
+            <li>
+              <p onClick={openGenerateModel}>Generate</p>
+            </li>
             {user?.roles.includes(Roles.ADMIN) && (
               <li>
                 <a onClick={openUploadModal}>Upload</a>
@@ -67,6 +81,7 @@ const NavBar = () => {
         </div>
       </div>
       <Upload />
+      <Generate />
     </>
   );
 };
