@@ -8,15 +8,15 @@ const Images = () => {
   const images = useImageStore((state) => state.images);
   const user = useUserStore((state) => state.user);
   const reRender = useImageStore((state) => state.reRender);
-  const [loading, setLoading] = useState(false);
   const [imageId, setImageId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false)
 
   const handleDelete = async (docId: string, public_id: string) => {
     try {
-      setLoading(true);
+      setDeleteLoading(true);
       const response = await deleteImage(docId, public_id);
       toast.success(response.message);
-      reRender();
+      reRender()
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -25,18 +25,18 @@ const Images = () => {
         return <p>No images</p>;
       }
     } finally {
-      setLoading(false);
+      setDeleteLoading(false)
     }
   };
-  if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen flex justify-center items-center">
+  //       <span className="loading loading-spinner loading-lg"></span>
+  //     </div>
+  //   );
+  // }
   if (images.length === 0) {
-    return <p>No images</p>
+    return <p>No images</p>;
   }
   return (
     <>
@@ -69,9 +69,9 @@ const Images = () => {
                 onClick={() => (
                   handleDelete(i._id, i.public_id), setImageId(i._id)
                 )}
-                disabled={loading && i._id === imageId ? loading : false}
+                disabled={deleteLoading && i._id === imageId ? deleteLoading : false}
               >
-                {loading && i._id === imageId ? "deleting..." : "X"}
+                {deleteLoading && i._id === imageId ? "deleting..." : "X"}
               </button>
             </div>
           ) : (
