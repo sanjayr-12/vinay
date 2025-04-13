@@ -40,7 +40,7 @@ const NavBar = () => {
     <>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Vinay</a>
+          <a className="btn btn-ghost text-xl">specview</a>
         </div>
         <div className="flex-none items-end justify-end">
           <ul className="menu menu-horizontal px-1">
