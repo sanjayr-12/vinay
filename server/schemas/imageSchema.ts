@@ -1,4 +1,3 @@
-import { boolean, required } from "joi";
 import mongoose from "mongoose";
 
 export const imageSchema = new mongoose.Schema(
