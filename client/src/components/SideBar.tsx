@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import Upload from "./Upload";
 import Generate from "./Generate";
-import { useUserStore } from "../store/Store";
-import { Roles } from "../types/store.types";
+// import { useUserStore } from "../store/Store";
+// import { Roles } from "../types/store.types";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const user = useUserStore((state) => state.user);
+//   const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -25,15 +25,15 @@ const SideBar = () => {
     };
   }, []);
 
-  const openUploadModal = () => {
-    const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
-    modal?.showModal();
-  };
+  //   const openUploadModal = () => {
+  //     const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
+  //     modal?.showModal();
+  //   };
 
-  const openGenerateModel = () => {
-    const model = document.getElementById("my_modal_2") as HTMLDialogElement;
-    model?.showModal();
-  };
+  //   const openGenerateModel = () => {
+  //     const model = document.getElementById("my_modal_2") as HTMLDialogElement;
+  //     model?.showModal();
+  //   };
 
   return (
     <div className="drawer">
@@ -69,13 +69,17 @@ const SideBar = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-          {user?.roles.includes(Roles.ADMIN) && (
-            <li>
-              <a onClick={openUploadModal}>Upload</a>
-            </li>
-          )}
           <li>
-            <a onClick={openGenerateModel}>Generate</a>
+            <a>Site Analysis</a>
+          </li>
+          <li>
+            <a>Design Details</a>
+          </li>
+          <li>
+            <a>Updates</a>
+          </li>
+          <li>
+            <a>Feedback</a>
           </li>
         </ul>
       </div>

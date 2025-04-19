@@ -1,9 +1,9 @@
 import { logoutAPI } from "../apis/apiStore";
 import { useUserStore } from "../store/Store";
-// import { Roles } from "../types/store.types";
+import { Roles } from "../types/store.types";
 import { useNavigate } from "react-router-dom";
-// import Upload from "./Upload";
-// import Generate from "./Generate";
+import Upload from "./Upload";
+import Generate from "./Generate";
 import SideBar from "./SideBar";
 
 const NavBar = () => {
@@ -27,15 +27,15 @@ const NavBar = () => {
     }
   };
 
-  // const openUploadModal = () => {
-  //   const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
-  //   modal?.showModal();
-  // };
+  const openUploadModal = () => {
+    const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
+    modal?.showModal();
+  };
 
-  // const openGenerateModel = () => {
-  //   const model = document.getElementById("my_modal_2") as HTMLDialogElement;
-  //   model?.showModal();
-  // };
+  const openGenerateModel = () => {
+    const model = document.getElementById("my_modal_2") as HTMLDialogElement;
+    model?.showModal();
+  };
 
   return (
     <>
@@ -45,14 +45,14 @@ const NavBar = () => {
         </div>
         <div className="flex-none items-end justify-end">
           <ul className="menu menu-horizontal px-1">
-            {/* <li>
+            <li>
               <p onClick={openGenerateModel}>Generate</p>
             </li>
             {user?.roles.includes(Roles.ADMIN) && (
               <li>
                 <a onClick={openUploadModal}>Upload</a>
               </li>
-            )} */}
+            )}
             <li>
               <p>{user?.name}</p>
             </li>
@@ -81,8 +81,8 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      {/* <Upload />
-      <Generate /> */}
+      <Upload />
+      <Generate />
     </>
   );
 };
