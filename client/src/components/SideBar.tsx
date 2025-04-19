@@ -24,18 +24,16 @@ const SideBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-    
-    
+
   const openUploadModal = () => {
     const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
     modal?.showModal();
-    };
-    
-     const openGenerateModel = () => {
-       const model = document.getElementById("my_modal_2") as HTMLDialogElement;
-       model?.showModal();
-     };
+  };
 
+  const openGenerateModel = () => {
+    const model = document.getElementById("my_modal_2") as HTMLDialogElement;
+    model?.showModal();
+  };
 
   return (
     <div className="drawer">
