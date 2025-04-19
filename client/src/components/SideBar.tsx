@@ -64,7 +64,7 @@ const SideBar = () => {
           </svg>
         </label>
       </div>
-      <div className="drawer-side max-w-40" ref={sidebarRef}>
+      <div className="drawer-side max-w-40 z-[9999]" ref={sidebarRef}>
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
