@@ -4,6 +4,7 @@ import { Roles } from "../types/store.types";
 import { useNavigate } from "react-router-dom";
 import Upload from "./Upload";
 import Generate from "./Generate";
+import SideBar from "./SideBar";
 
 const NavBar = () => {
   const user = useUserStore((state) => state.user);
@@ -40,7 +41,7 @@ const NavBar = () => {
     <>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">specview</a>
+          <SideBar />
         </div>
         <div className="flex-none items-end justify-end">
           <ul className="menu menu-horizontal px-1">
