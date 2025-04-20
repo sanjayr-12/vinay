@@ -6,6 +6,7 @@ import Feedback from "./pages/Feedback";
 import { useUserStore } from "./store/Store";
 import { Roles } from "./types/store.types";
 import DisplayFeedBack from "./pages/DisplayFeedBack";
+import Design from "./pages/Design";
 
 const App = () => {
   const user = useUserStore((state) => state.user);
@@ -25,6 +26,7 @@ const App = () => {
               )
             }
           />
+          <Route path="/design" element={ <Design/>} />
         </Route>
       </Routes>
     </div>

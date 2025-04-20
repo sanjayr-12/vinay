@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { getImages } from "../apis/apiStore";
 import { useImageStore } from "../store/Store";
-import HomeIntro from "./HomeIntro";
+import Images from "../components/Images";
+import NavBar from "../components/NavBar";
 
-const Body = () => {
+const Design = () => {
   const setImage = useImageStore((state) => state.setImages);
   const render = useImageStore((state) => state.render);
 
@@ -15,10 +16,13 @@ const Body = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [render]);
   return (
-    <div className="mt-5 flex justify-center items-center flex-wrap gap-10">
-      <HomeIntro />
-    </div>
+    <>
+      <NavBar />
+      <div className="mt-5 flex justify-center items-center flex-wrap gap-10">
+        <Images />
+      </div>
+    </>
   );
 };
 
-export default Body;
+export default Design;

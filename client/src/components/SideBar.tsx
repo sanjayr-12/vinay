@@ -58,12 +58,16 @@ const SideBar = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           <li>
-            <a onClick={()=>navigate("/")} >Home</a>
+            <a onClick={() => navigate("/")}>Home</a>
           </li>
           <li>
             <a>Site Analysis</a>
           </li>
-          <li>
+          <li
+            onClick={() => {
+              navigate("/design");
+            }}
+          >
             <a>Design Details</a>
           </li>
           <li>
