@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/Store";
+import { Roles } from "../types/store.types";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const users = useUserStore((state) => state.user);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -60,6 +63,15 @@ const SideBar = () => {
           <li>
             <a onClick={() => navigate("/")}>Home</a>
           </li>
+          {users?.roles.includes(Roles.ROOT) && (
+            <li
+              onClick={() => {
+                navigate("/users");
+              }}
+            >
+              <a>Users</a>
+            </li>
+          )}
           <li>
             <a>Site Analysis</a>
           </li>

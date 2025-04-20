@@ -2,6 +2,7 @@
 export enum Roles {
   USER = "USER",
   ADMIN = "ADMIN",
+  ROOT = "ROOT"
 }
 export type User = {
   _id: string | undefined;

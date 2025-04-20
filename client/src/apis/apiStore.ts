@@ -87,5 +87,10 @@ export const actionFeedBack = async (id: string) => {
     { id },
     { withCredentials: true }
   );
-  return response.data
+  return response.data;
+};
+
+export const getAllUsers = async () => {
+  const response = await axios.get("/api/user/all", { withCredentials: true });
+  return response.data;
 };
