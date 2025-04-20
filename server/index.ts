@@ -1,5 +1,5 @@
 import cluster from "cluster";
-import os from "os";
+import { availableParallelism } from "os";
 import express from "express";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth.routes";
@@ -12,7 +12,7 @@ import path from "path";
 import utilRouter from "./utils/utils.routes";
 import { reStart } from "./utils/self.cron";
 
-const numCPUs = os.cpus().length;
+const numCPUs = availableParallelism();
 
 if (cluster.isPrimary) {
   console.log(`Master ${process.pid} is running`);
