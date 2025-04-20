@@ -7,10 +7,12 @@ const ActionFeedBackCard = () => {
   const setFeedBack = useFeedBackStore((state) => state.setFeedBack);
   const feedback = useFeedBackStore((state) => state.feedback);
   const [depend, setDepend] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         const response = await getAllFeedBack();
         setFeedBack(response.data);
       } catch (error) {
@@ -19,10 +21,20 @@ const ActionFeedBackCard = () => {
         } else {
           toast.error("server error");
         }
+      } finally {
+        setLoading(false);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [depend]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   const handleAction = async (id: string) => {
     try {
