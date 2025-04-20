@@ -7,6 +7,7 @@ const FeedBackCard = () => {
   const setFeedBack = useFeedBackStore((state) => state.setFeedBack);
   const feedback = useFeedBackStore((state) => state.feedback);
   const [depend, setDepend] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -23,6 +24,7 @@ const FeedBackCard = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const formData = new FormData(e.currentTarget);
       const content = formData.get("feedback")?.toString();
       if (!content || content?.toString().trim() === "") return;
@@ -31,6 +33,8 @@ const FeedBackCard = () => {
       toast.success(response.message);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,7 +52,12 @@ const FeedBackCard = () => {
             className="input input-bordered w-full max-w-xs"
             name="feedback"
           />
-          <input type="submit" className="btn" />
+          <input
+            type="submit"
+            value={loading ? "submiting..." : "submit"}
+            className="btn"
+            disabled={loading}
+          />
         </form>
       </div>
       <div className="mt-5 flex justify-center items-center flex-wrap gap-10">
