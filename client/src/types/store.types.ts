@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export enum Roles {
   USER = "USER",
   ADMIN = "ADMIN",
@@ -15,7 +16,6 @@ export type userStore = {
 };
 
 export type Image = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   images: any[];
   render: number;
   setImages: (i: Image[]) => void;
@@ -32,5 +32,18 @@ export type ImageType = {
 
 export type LoadingStore = {
   uploadLoading: boolean;
-  setUploadLoading: (val:boolean) => void;
+  setUploadLoading: (val: boolean) => void;
+};
+
+export type FeedBackType = {
+  _id: string;
+  content: string;
+  user: { _id: string; name: string };
+  isAddressed: boolean;
+  addressedBy: { _id: string; name: string } | undefined;
+};
+
+export type FeedBackStore = {
+  feedback: any[];
+  setFeedBack: (val: FeedBackType[]) => void;
 };

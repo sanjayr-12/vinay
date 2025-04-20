@@ -1,6 +1,10 @@
 import { create } from "zustand";
-import { Image, User } from "../types/store.types";
-import type { LoadingStore, userStore } from "../types/store.types";
+import { FeedBackStore, Image, User } from "../types/store.types";
+import type {
+  FeedBackType,
+  LoadingStore,
+  userStore,
+} from "../types/store.types";
 
 export const useUserStore = create<userStore>()((set) => ({
   user: undefined,
@@ -20,4 +24,9 @@ export const useImageStore = create<Image>()((set) => ({
 export const useLoadingStore = create<LoadingStore>()((set) => ({
   uploadLoading: false,
   setUploadLoading: (val: boolean) => set({ uploadLoading: val }),
+}));
+
+export const useFeedBackStore = create<FeedBackStore>()((set) => ({
+  feedback: [],
+  setFeedBack: (val: FeedBackType[]) => set({ feedback: val }),
 }));

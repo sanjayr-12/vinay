@@ -57,3 +57,35 @@ export const generateAIImage = async (prompt: string) => {
   );
   return response.data;
 };
+
+export const addFeedBack = async (content: string) => {
+  const response = await axios.post(
+    "/api/user/feedback",
+    { content },
+    { withCredentials: true }
+  );
+  return response.data;
+};
+
+export const getAllFeedBack = async () => {
+  const response = await axios.get("/api/user/feedback/all", {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export const getUserFeedBack = async () => {
+  const response = await axios.get("/api/user/feedback/user", {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export const actionFeedBack = async (id: string) => {
+  const response = await axios.post(
+    "/api/user/feedback/action",
+    { id },
+    { withCredentials: true }
+  );
+  return response.data
+};
