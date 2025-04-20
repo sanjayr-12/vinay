@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import Upload from "./Upload";
-import Generate from "./Generate";
-// import { useUserStore } from "../store/Store";
-// import { Roles } from "../types/store.types";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-//   const user = useUserStore((state) => state.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -24,16 +21,6 @@ const SideBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  //   const openUploadModal = () => {
-  //     const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
-  //     modal?.showModal();
-  //   };
-
-  //   const openGenerateModel = () => {
-  //     const model = document.getElementById("my_modal_2") as HTMLDialogElement;
-  //     model?.showModal();
-  //   };
 
   return (
     <div className="drawer">
@@ -67,8 +54,12 @@ const SideBar = () => {
           htmlFor="my-drawer"
           aria-label="close sidebar"
           className="drawer-overlay"
+          onClick={() => setIsOpen(false)}
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+          <li>
+            <a onClick={()=>navigate("/")} >Home</a>
+          </li>
           <li>
             <a>Site Analysis</a>
           </li>
@@ -78,13 +69,15 @@ const SideBar = () => {
           <li>
             <a>Updates</a>
           </li>
-          <li>
+          <li
+            onClick={() => {
+              navigate("/feedback");
+            }}
+          >
             <a>Feedback</a>
           </li>
         </ul>
       </div>
-      <Upload />
-      <Generate />
     </div>
   );
 };

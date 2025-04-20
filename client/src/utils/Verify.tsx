@@ -15,7 +15,6 @@ const Verify = () => {
         setLoading(true);
         const response = await verifyAPI();
         setUser(response.userData);
-        navigate("/");
       } catch (error) {
         console.log(error);
         navigate("/login");
