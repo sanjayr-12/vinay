@@ -20,6 +20,8 @@ const Oauth = () => {
         onSuccess={(res) => {
           handleLogin(res.credential as string);
         }}
+        shape="pill"
+        useOneTap
       />
     </div>
   );
