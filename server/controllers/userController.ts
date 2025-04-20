@@ -112,3 +112,73 @@ export const generateAIImageController = async (
     return;
   }
 };
+
+export const addFeedBackController = async (
+  req: CustomRequest,
+  res: Response
+) => {
+  try {
+    const requestSchema = Joi.object({
+      content: Joi.string().min(1).required(),
+    });
+    const { error } = requestSchema.validate(req.body);
+    if (error) {
+      res.status(406).json({ status: "error", message: error.message });
+      return;
+    }
+    await userService.addFeedBack(req.body.content, String(req.userId));
+    res.status(200).json({ status: "ok", message: "feedback added" });
+    return;
+  } catch (error: any) {
+    res.status(503).json({ status: "error", message: error.message });
+    return;
+  }
+};
+
+export const getAllFeedBackController = async (
+  req: CustomRequest,
+  res: Response
+) => {
+  try {
+    const data = await userService.allFeedBack();
+    res.status(200).json({ status: "ok", data });
+    return;
+  } catch (error: any) {
+    res.status(503).json({ status: "ok", error: error.message });
+    return;
+  }
+};
+
+export const getUserFeedBackController = async (
+  req: CustomRequest,
+  res: Response
+) => {
+  try {
+    const data = await userService.userFeedBack(String(req.userId));
+    res.status(200).json({ status: "ok", data });
+  } catch (error: any) {
+    res.status(503).json({ status: "error", error: error.message });
+  }
+};
+
+export const feedBackActionController = async (
+  req: CustomRequest,
+  res: Response
+) => {
+  try {
+    const requestSchema = Joi.object({
+      id: Joi.string().min(1).required(),
+    });
+    let { error } = requestSchema.validate(req.body);
+    if (error) {
+      res.status(406).json({ status: "error", message: error.message });
+      return;
+    }
+    await userService.feedBackAction(String(req.userId), req.body.id);
+    res.status(200).json({ status: "ok", message: "status updated" });
+    return;
+  } catch (error: any) {
+    res.status(503).json({ status: "error", message: error.message });
+    return;
+  }
+};

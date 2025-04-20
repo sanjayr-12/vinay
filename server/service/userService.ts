@@ -1,4 +1,4 @@
-import { imageModel } from "../models/models";
+import { feedBackModel, imageModel } from "../models/models";
 import { deleteImage, imageUpload } from "../utils/handle.img";
 import { textToImage } from "../utils/TextToImage";
 
@@ -34,8 +34,41 @@ export class UserService {
     return true;
   }
 
-  async generateAIImage(prompt:string) {
-    const result = await textToImage(prompt)
+  async generateAIImage(prompt: string) {
+    const result = await textToImage(prompt);
     // console.log(result)
+  }
+
+  async addFeedBack(content: string, userId: string) {
+    const newFeedBack = {
+      content,
+      user: userId,
+    };
+    await new feedBackModel(newFeedBack).save();
+    return true;
+  }
+
+  async allFeedBack() {
+    const data = await feedBackModel
+      .find({ isAddressed: false })
+      .populate("user", "name")
+      .populate("addressedBy", "name");
+    return data;
+  }
+
+  async userFeedBack(userId: string) {
+    const data = await feedBackModel
+      .find({ user: userId })
+      .populate("user", "name")
+      .populate("addressedBy", "name");
+    return data;
+  }
+
+  async feedBackAction(userId: string, id: string) {
+    await feedBackModel.findByIdAndUpdate(id, {
+      addressedBy: userId,
+      isAddressed: true,
+    });
+    return true;
   }
 }
