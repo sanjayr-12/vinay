@@ -5,17 +5,29 @@ import toast, { Toaster } from "react-hot-toast";
 
 export const UsersCard = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         const users = await getAllUsers();
         setUsers(users.data);
         console.log(users);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   const handleUserAction = async () => {
     toast(
