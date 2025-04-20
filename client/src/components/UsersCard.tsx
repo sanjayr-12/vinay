@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../apis/apiStore";
 import { Roles, User } from "../types/store.types";
+import toast, { Toaster } from "react-hot-toast";
 
 export const UsersCard = () => {
   const [users, setUsers] = useState([]);
@@ -15,6 +16,15 @@ export const UsersCard = () => {
       }
     })();
   }, []);
+
+  const handleUserAction = async () => {
+    toast(
+      "Hold your horses! 🐎 This admin-making feature is still in development... Maybe next year? 🎭",
+      {
+        icon: "🎪",
+      }
+    );
+  };
 
   return (
     <div className="mt-5 flex justify-center items-center flex-wrap gap-10">
@@ -36,7 +46,9 @@ export const UsersCard = () => {
                 {!user.roles.includes(Roles.ADMIN) &&
                 !user.roles.includes(Roles.ROOT) ? (
                   <div className="card-actions justify-end">
-                    <button className="btn">Make em Admin</button>
+                    <button className="btn" onClick={handleUserAction}>
+                      Make em Admin
+                    </button>
                   </div>
                 ) : (
                   <div className="card-actions justify-end">
@@ -51,6 +63,7 @@ export const UsersCard = () => {
             </div>
           );
         })}
+      <Toaster />
     </div>
   );
 };

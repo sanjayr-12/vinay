@@ -22,17 +22,18 @@ const Generate = () => {
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <p className="py-4 text-lg font-bold">
               {" "}
-              This module will be disabled until i find an api for free... lol
+              Module in progress... but don't hold your breath! Free AI image
+              generation? In this economy? Maybe next century!
             </p>
-            <input
+            {/* <input
               type="text"
               placeholder="Describe your image"
               className="input input-ghost w-full max-w-xs"
               name="prompt"
               disabled
-            />
+            /> */}
             <div className="flex justify-end gap-4">
-              <input type="submit" value="generate" className="btn" disabled />
+              {/* <input type="submit" value="generate" className="btn" disabled /> */}
               <button
                 type="button"
                 className="btn"
