@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useFeedBackStore } from "../store/Store";
 import { addFeedBack, getUserFeedBack } from "../apis/apiStore";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,6 +8,7 @@ const FeedBackCard = () => {
   const feedback = useFeedBackStore((state) => state.feedback);
   const [depend, setDepend] = useState(0);
   const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -35,6 +36,7 @@ const FeedBackCard = () => {
       const response = await addFeedBack(content);
       setDepend(depend + 1);
       toast.success(response.message);
+      formRef.current?.reset();
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -53,6 +55,7 @@ const FeedBackCard = () => {
         <form
           onSubmit={handleSubmit}
           className="flex gap-5 justify-center items-center"
+          ref={formRef}
         >
           <input
             type="text"
