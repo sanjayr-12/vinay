@@ -1,4 +1,4 @@
-import { feedBackModel, imageModel } from "../models/models";
+import { feedBackModel, imageModel, userModel } from "../models/models";
 import { deleteImage, imageUpload } from "../utils/handle.img";
 import { textToImage } from "../utils/TextToImage";
 
@@ -70,5 +70,10 @@ export class UserService {
       isAddressed: true,
     });
     return true;
+  }
+
+  async getAllUsers() {
+    const users = await userModel.find({}).sort({ roles: -1 });
+    return users
   }
 }

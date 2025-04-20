@@ -6,6 +6,7 @@ import {
   feedBackActionController,
   generateAIImageController,
   getAllFeedBackController,
+  getAllUsersController,
   getImageController,
   getUserFeedBackController,
   imageUploadController,
@@ -23,5 +24,7 @@ userRouter.post("/feedback", protectRoutes, addFeedBackController);
 userRouter.get("/feedback/all", protectRoutes, getAllFeedBackController);
 userRouter.get("/feedback/user", protectRoutes, getUserFeedBackController);
 userRouter.post("/feedback/action", protectRoutes, feedBackActionController)
+
+userRouter.get("/all", protectRoutes, getAllUsersController)
 
 export default userRouter;

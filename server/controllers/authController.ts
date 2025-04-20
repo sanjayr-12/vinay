@@ -50,8 +50,10 @@ export const verifyAuthController = async (req: Request, res: Response) => {
       return;
     }
     res.status(200).json({ status: "ok", userData: data });
+    return;
   } catch (error: any) {
     res.status(503).json({ status: "error", message: error.message });
+    return;
   }
 };
 

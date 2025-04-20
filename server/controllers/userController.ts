@@ -175,10 +175,23 @@ export const feedBackActionController = async (
       return;
     }
     await userService.feedBackAction(String(req.userId), req.body.id);
-    res.status(200).json({ status: "ok", message: "status updated" });
+    res.status(200).json({ status: "ok", message: "resolved" });
     return;
   } catch (error: any) {
     res.status(503).json({ status: "error", message: error.message });
     return;
+  }
+};
+
+export const getAllUsersController = async (
+  req: CustomRequest,
+  res: Response
+) => {
+  try {
+    const data = await userService.getAllUsers();
+    res.status(200).json({ status: "ok", data });
+    return;
+  } catch (error: any) {
+    res.status(503).json({ status: "error", message: error.message });
   }
 };
