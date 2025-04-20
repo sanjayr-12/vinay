@@ -15,7 +15,11 @@ const FeedBackCard = () => {
         const response = await getUserFeedBack();
         setFeedBack(response.data);
       } catch (error) {
-        console.log(error);
+        if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error("server error");
+        }
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +36,11 @@ const FeedBackCard = () => {
       setDepend(depend + 1);
       toast.success(response.message);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("server error");
+      }
     } finally {
       setLoading(false);
     }

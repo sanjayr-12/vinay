@@ -14,7 +14,11 @@ const ActionFeedBackCard = () => {
         const response = await getAllFeedBack();
         setFeedBack(response.data);
       } catch (error) {
-        console.log(error);
+        if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error("server error");
+        }
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,13 +30,17 @@ const ActionFeedBackCard = () => {
       toast.success(response.message);
       setDepend(depend + 1);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("server error");
+      }
     }
   };
 
   return (
     <div className="mt-10 flex justify-center items-center flex-wrap gap-10">
-      {feedback.length > 0 ?
+      {feedback.length > 0 ? (
         feedback.map((item) => {
           return (
             <div className="card bg-base-100 w-96 shadow-xl">
@@ -45,13 +53,16 @@ const ActionFeedBackCard = () => {
                     className="btn btn-warning"
                     onClick={() => handleAction(item._id)}
                   >
-                    Address
+                    Resolve
                   </button>
                 </div>
               </div>
             </div>
           );
-        }):<p className="mt-10 card-title">looks like no one gave feedback</p>}
+        })
+      ) : (
+        <p className="mt-10 card-title">looks like no one gave feedback</p>
+      )}
       <Toaster />
     </div>
   );
