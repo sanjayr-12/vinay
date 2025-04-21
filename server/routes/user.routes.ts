@@ -15,7 +15,7 @@ import {
 const userRouter = express.Router();
 
 userRouter.post("/upload-img", protectRoutes, imageUploadController);
-userRouter.get("/get-imgs", protectRoutes, getImageController);
+userRouter.post("/get-imgs", protectRoutes, getImageController);
 userRouter.post("/delete-img", protectRoutes, deleteImageController);
 
 userRouter.post("/gen-img", protectRoutes, generateAIImageController);

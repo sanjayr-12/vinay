@@ -3,7 +3,12 @@ import { deleteImage, imageUpload } from "../utils/handle.img";
 import { textToImage } from "../utils/TextToImage";
 
 export class UserService {
-  async imageUpload(base64String: string, imageName: string, userId: string) {
+  async imageUpload(
+    base64String: string,
+    imageName: string,
+    userId: string,
+    category: string
+  ) {
     let [url, public_id] = await imageUpload(base64String);
     let newImage = {
       url,
@@ -12,14 +17,15 @@ export class UserService {
       visibility: "PUBLIC",
       uploadedBy: userId,
       isAI: false,
+      category,
     };
     await new imageModel(newImage).save();
     return true;
   }
 
-  async getImages() {
+  async getImages(category: string) {
     const imageData = await imageModel
-      .find({})
+      .find({ category })
       .sort({ _id: -1 })
       .populate("uploadedBy", "name")
       .exec();
@@ -74,6 +80,6 @@ export class UserService {
 
   async getAllUsers() {
     const users = await userModel.find({}).sort({ roles: -1 });
-    return users
+    return users;
   }
 }
