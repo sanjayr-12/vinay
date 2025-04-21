@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { verifyAPI } from "../apis/apiStore";
 import { useUserStore } from "../store/Store";
 import { Outlet, useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Verify = () => {
   const navigate = useNavigate();
@@ -26,11 +27,7 @@ const Verify = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   return <div>{user && <Outlet />}</div>;

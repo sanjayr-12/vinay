@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../apis/apiStore";
 import { Roles, User } from "../types/store.types";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../utils/Loading";
 
 export const UsersCard = () => {
   const [users, setUsers] = useState([]);
@@ -22,11 +23,7 @@ export const UsersCard = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   const handleUserAction = async () => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useFeedBackStore } from "../store/Store";
 import { actionFeedBack, getAllFeedBack } from "../apis/apiStore";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../utils/Loading";
 
 const ActionFeedBackCard = () => {
   const setFeedBack = useFeedBackStore((state) => state.setFeedBack);
@@ -29,11 +30,7 @@ const ActionFeedBackCard = () => {
   }, [depend]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   const handleAction = async (id: string) => {
