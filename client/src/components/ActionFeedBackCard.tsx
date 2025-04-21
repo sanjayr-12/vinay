@@ -2,18 +2,15 @@ import { useEffect, useState } from "react";
 import { useFeedBackStore } from "../store/Store";
 import { actionFeedBack, getAllFeedBack } from "../apis/apiStore";
 import toast, { Toaster } from "react-hot-toast";
-import Loading from "../utils/Loading";
 
 const ActionFeedBackCard = () => {
   const setFeedBack = useFeedBackStore((state) => state.setFeedBack);
   const feedback = useFeedBackStore((state) => state.feedback);
   const [depend, setDepend] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
         const response = await getAllFeedBack();
         setFeedBack(response.data);
       } catch (error) {
@@ -22,16 +19,10 @@ const ActionFeedBackCard = () => {
         } else {
           toast.error("server error");
         }
-      } finally {
-        setLoading(false);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [depend]);
-
-  if (loading) {
-    return <Loading />;
-  }
 
   const handleAction = async (id: string) => {
     try {
@@ -52,7 +43,7 @@ const ActionFeedBackCard = () => {
       {feedback.length > 0 ? (
         feedback.map((item) => {
           return (
-            <div className="card bg-base-100 w-96 shadow-xl">
+            <div className="card bg-base-100 w-96 shadow-xl" key={item._id}>
               <div className="card-body">
                 <p className="card-title">{item.content}</p>
                 <br />
