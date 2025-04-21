@@ -60,5 +60,7 @@ export type FeedBackStore = {
 
 export type ImageCategoryStore = {
   category: ImageCategoryEnum;
+  loading: boolean;
   setImageCategory: (val: ImageCategoryEnum) => void;
+  setLoading: (bol: boolean) => void;
 };

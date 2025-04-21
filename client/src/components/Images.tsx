@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { deleteImage } from "../apis/apiStore";
-import { useImageStore, useUserStore } from "../store/Store";
+import {
+  useImageCategoryStore,
+  useImageStore,
+  useUserStore,
+} from "../store/Store";
 import { ImageType } from "../types/store.types";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../utils/Loading";
 
 const Images = ({ images }: { images: ImageType[] }) => {
   const user = useUserStore((state) => state.user);
   const reRender = useImageStore((state) => state.reRender);
   const [imageId, setImageId] = useState("");
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const loading = useImageCategoryStore((state) => state.loading);
 
   const handleDelete = async (docId: string, public_id: string) => {
     try {
@@ -27,13 +33,9 @@ const Images = ({ images }: { images: ImageType[] }) => {
       setDeleteLoading(false);
     }
   };
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex justify-center items-center">
-  //       <span className="loading loading-spinner loading-lg"></span>
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return <Loading/>
+  }
   if (images.length === 0) {
     return <p>No images</p>;
   }

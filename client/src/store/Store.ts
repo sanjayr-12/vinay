@@ -39,5 +39,7 @@ export const useFeedBackStore = create<FeedBackStore>()((set) => ({
 
 export const useImageCategoryStore = create<ImageCategoryStore>()((set) => ({
   category: ImageCategoryEnum.DESIGN,
+  loading: false,
   setImageCategory: (val: ImageCategoryEnum) => set({ category: val }),
+  setLoading: (bol: boolean) => set({ loading: bol }),
 }));
