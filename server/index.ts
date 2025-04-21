@@ -11,8 +11,14 @@ import userRouter from "./routes/user.routes";
 import path from "path";
 import utilRouter from "./utils/utils.routes";
 import { reStart } from "./utils/self.cron";
+import { rateLimit } from "express-rate-limit";
 
 const numCPUs = availableParallelism();
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests from this IP, please try again later.",
+});
 
 if (cluster.isPrimary) {
   console.log(`Master ${process.pid} is running`);
@@ -29,10 +35,13 @@ if (cluster.isPrimary) {
   dotenv.config();
   const app = express();
 
+  app.set("trust proxy", true);
+
   app.use(express.json({ limit: "10mb" }));
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, "../../client/dist")));
-
+  app.use(limiter);
+  
   app.use("/api/auth", authRouter);
   app.use("/api/user", userRouter);
   app.use("/api/utils", utilRouter);
