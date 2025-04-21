@@ -8,6 +8,8 @@ export enum Roles {
 export enum ImageCategoryEnum {
   DESIGN = "DESIGN",
   ANALYTICS = "ANALYTICS",
+  UPDATES = "UPDATES",
+  INTERIOR = "INTERIOR",
 }
 
 export type User = {
@@ -57,6 +59,6 @@ export type FeedBackStore = {
 };
 
 export type ImageCategoryStore = {
-  category: ImageCategoryEnum,
-  setImageCategory:(val:ImageCategoryEnum)=>void
-}
+  category: ImageCategoryEnum;
+  setImageCategory: (val: ImageCategoryEnum) => void;
+};
