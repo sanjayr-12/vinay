@@ -35,13 +35,14 @@ if (cluster.isPrimary) {
   dotenv.config();
   const app = express();
 
-  app.set("trust proxy", true);
+  app.set("trust proxy", 1);
 
   app.use(express.json({ limit: "10mb" }));
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, "../../client/dist")));
+
   app.use(limiter);
-  
+
   app.use("/api/auth", authRouter);
   app.use("/api/user", userRouter);
   app.use("/api/utils", utilRouter);
