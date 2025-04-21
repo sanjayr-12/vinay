@@ -2,8 +2,14 @@
 export enum Roles {
   USER = "USER",
   ADMIN = "ADMIN",
-  ROOT = "ROOT"
+  ROOT = "ROOT",
 }
+
+export enum ImageCategoryEnum {
+  DESIGN = "DESIGN",
+  ANALYTICS = "ANALYTICS",
+}
+
 export type User = {
   _id: string | undefined;
   name: string | undefined;
@@ -29,6 +35,7 @@ export type ImageType = {
   public_id: string;
   uploadedBy: { _id: string; name: string };
   imageName: string;
+  category: ImageCategoryEnum;
 };
 
 export type LoadingStore = {
@@ -48,3 +55,8 @@ export type FeedBackStore = {
   feedback: any[];
   setFeedBack: (val: FeedBackType[]) => void;
 };
+
+export type ImageCategoryStore = {
+  category: ImageCategoryEnum,
+  setImageCategory:(val:ImageCategoryEnum)=>void
+}

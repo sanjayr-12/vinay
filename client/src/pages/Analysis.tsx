@@ -5,14 +5,14 @@ import Images from "../components/Images";
 import NavBar from "../components/NavBar";
 import { ImageCategoryEnum } from "../types/store.types";
 
-const Design = () => {
+const Analysis = () => {
   const setImage = useImageStore((state) => state.setImages);
   const render = useImageStore((state) => state.render);
-  const images = useImageStore((state)=>state.images)
+  const images = useImageStore((state) => state.images);
 
   useEffect(() => {
     (async () => {
-      const result = await getImages(ImageCategoryEnum.DESIGN);
+      const result = await getImages(ImageCategoryEnum.ANALYTICS);
       setImage(result.images);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,4 +28,4 @@ const Design = () => {
   );
 };
 
-export default Design;
+export default Analysis;

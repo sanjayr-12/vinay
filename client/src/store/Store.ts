@@ -1,7 +1,13 @@
 import { create } from "zustand";
-import { FeedBackStore, Image, User } from "../types/store.types";
+import {
+  FeedBackStore,
+  Image,
+  ImageCategoryEnum,
+  User,
+} from "../types/store.types";
 import type {
   FeedBackType,
+  ImageCategoryStore,
   LoadingStore,
   userStore,
 } from "../types/store.types";
@@ -29,4 +35,9 @@ export const useLoadingStore = create<LoadingStore>()((set) => ({
 export const useFeedBackStore = create<FeedBackStore>()((set) => ({
   feedback: [],
   setFeedBack: (val: FeedBackType[]) => set({ feedback: val }),
+}));
+
+export const useImageCategoryStore = create<ImageCategoryStore>()((set) => ({
+  category: ImageCategoryEnum.DESIGN,
+  setImageCategory: (val: ImageCategoryEnum) => set({ category: val }),
 }));

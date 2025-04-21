@@ -27,6 +27,12 @@ export const imageSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+      enum: ["DESIGN", "ANALYTICS"],
+      index: true,
+    },
   },
   { timestamps: true }
 );
