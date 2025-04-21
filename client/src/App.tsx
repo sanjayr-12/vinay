@@ -8,6 +8,7 @@ import { Roles } from "./types/store.types";
 import DisplayFeedBack from "./pages/DisplayFeedBack";
 import Design from "./pages/Design";
 import { Users } from "./pages/Users";
+import Analysis from "./pages/Analysis";
 
 const App = () => {
   const user = useUserStore((state) => state.user);
@@ -29,6 +30,7 @@ const App = () => {
           />
           <Route path="/design" element={<Design />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/analysis" element={<Analysis />} />
         </Route>
       </Routes>
     </div>

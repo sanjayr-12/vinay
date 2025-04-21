@@ -4,19 +4,18 @@ import { useImageStore, useUserStore } from "../store/Store";
 import { ImageType } from "../types/store.types";
 import toast, { Toaster } from "react-hot-toast";
 
-const Images = () => {
-  const images = useImageStore((state) => state.images);
+const Images = ({ images }: { images: ImageType[] }) => {
   const user = useUserStore((state) => state.user);
   const reRender = useImageStore((state) => state.reRender);
   const [imageId, setImageId] = useState("");
-  const [deleteLoading, setDeleteLoading] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleDelete = async (docId: string, public_id: string) => {
     try {
       setDeleteLoading(true);
       const response = await deleteImage(docId, public_id);
       toast.success(response.message);
-      reRender()
+      reRender();
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -25,7 +24,7 @@ const Images = () => {
         return <p>No images</p>;
       }
     } finally {
-      setDeleteLoading(false)
+      setDeleteLoading(false);
     }
   };
   // if (loading) {
@@ -69,7 +68,9 @@ const Images = () => {
                 onClick={() => (
                   handleDelete(i._id, i.public_id), setImageId(i._id)
                 )}
-                disabled={deleteLoading && i._id === imageId ? deleteLoading : false}
+                disabled={
+                  deleteLoading && i._id === imageId ? deleteLoading : false
+                }
               >
                 {deleteLoading && i._id === imageId ? "deleting..." : "X"}
               </button>

@@ -1,13 +1,16 @@
 import { imageUpload } from "../apis/apiStore";
 import UploadModel from "../models/UploadModel";
-import { useImageStore, useLoadingStore } from "../store/Store";
+import { useImageCategoryStore, useImageStore, useLoadingStore } from "../store/Store";
 import { useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import ImageCategory from "./ImageCategory";
 
 const Upload = () => {
   const reRender = useImageStore((state) => state.reRender);
   const formRef = useRef<HTMLFormElement>(null);
-  const setLoading = useLoadingStore((state)=>state.setUploadLoading)
+  const setLoading = useLoadingStore((state) => state.setUploadLoading)
+  const category = useImageCategoryStore((state) => state.category)
+
   const handleImageUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -22,7 +25,7 @@ const Upload = () => {
       reader.onloadend = async () => {
         const base64String = reader.result as string;
         setLoading(true);
-        const result = await imageUpload(base64String, imageName);
+        const result = await imageUpload(base64String, imageName, category);
         setLoading(false);
         reRender();
         toast.success(result.message);
@@ -59,6 +62,9 @@ const Upload = () => {
               name="imgName"
               required
             />
+            <div>
+              <ImageCategory />
+            </div>
             <UploadModel />
           </form>
         </div>

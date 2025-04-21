@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ImageCategoryEnum } from "../types/store.types";
 
 export const loginAPI = async (token: string) => {
   const response = await axios.post("/api/auth/", {
@@ -22,10 +23,10 @@ export const logoutAPI = async () => {
   return response.data;
 };
 
-export const imageUpload = async (imageBase64: string, name: string) => {
+export const imageUpload = async (imageBase64: string, name: string, category:ImageCategoryEnum) => {
   const response = await axios.post(
     "/api/user/upload-img",
-    { imageBase64, imageName: name },
+    { imageBase64, imageName: name, category },
     {
       withCredentials: true,
     }
@@ -33,8 +34,8 @@ export const imageUpload = async (imageBase64: string, name: string) => {
   return response.data;
 };
 
-export const getImages = async () => {
-  const response = await axios.get("/api/user/get-imgs", {
+export const getImages = async (category: ImageCategoryEnum) => {
+  const response = await axios.post("/api/user/get-imgs", {category},{
     withCredentials: true,
   });
   return response.data;

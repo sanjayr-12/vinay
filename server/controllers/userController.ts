@@ -23,6 +23,7 @@ export const imageUploadController = async (
     let requestSchema = Joi.object({
       imageBase64: Joi.string().min(1).required(),
       imageName: Joi.string().min(1).required(),
+      category: Joi.string().min(1).required()
     });
 
     let { error } = requestSchema.validate(req.body);
@@ -32,7 +33,8 @@ export const imageUploadController = async (
     await userService.imageUpload(
       req.body.imageBase64,
       req.body.imageName,
-      String(req.userId)
+      String(req.userId),
+      req.body.category
     );
     res.status(200).json({ status: "ok", message: "image uploaded" });
     return;
@@ -46,7 +48,15 @@ export const imageUploadController = async (
 
 export const getImageController = async (req: CustomRequest, res: Response) => {
   try {
-    const result = await userService.getImages();
+    const requestSchema = Joi.object({
+      category: Joi.string().min(1).required()
+    })
+    const { error } = requestSchema.validate(req.body)
+    if (error) {
+      res.status(406).json({ status: "error", message: error.message })
+      return
+    }
+    const result = await userService.getImages(req.body.category);
     res.status(200).json({ status: "ok", images: result });
     return;
   } catch (error) {

@@ -72,7 +72,7 @@ const SideBar = () => {
               <a>Users</a>
             </li>
           )}
-          <li>
+          <li onClick={() => navigate("/analysis")}>
             <a>Site Analysis</a>
           </li>
           <li
