@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../apis/apiStore";
 import { Roles, User } from "../types/store.types";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
 import Loading from "../utils/Loading";
 
 export const UsersCard = () => {
@@ -26,14 +26,14 @@ export const UsersCard = () => {
     return <Loading />;
   }
 
-  const handleUserAction = async () => {
-    toast(
-      "Hold your horses! 🐎 This admin-making feature is still in development... Maybe next year? 🎭",
-      {
-        icon: "🎪",
-      }
-    );
-  };
+  // const handleUserAction = async () => {
+  //   toast(
+  //     "Hold your horses! 🐎 This admin-making feature is still in development... Maybe next year? 🎭",
+  //     {
+  //       icon: "🎪",
+  //     }
+  //   );
+  // };
 
   return (
     <div className="mt-5 flex justify-center items-center flex-wrap gap-10">
@@ -51,8 +51,13 @@ export const UsersCard = () => {
             >
               <div className="card-body">
                 <h2 className="card-title">{user.name}</h2>
-                <p>Roles: {user.roles.join(", ")}</p>
-                {!user.roles.includes(Roles.ADMIN) &&
+                <p>
+                  Roles:{" "}
+                  {user.roles
+                    .map((role) => (role === Roles.USER ? "MEMBER" : role))
+                    .join(", ")}
+                </p>
+                {/* {!user.roles.includes(Roles.ADMIN) &&
                 !user.roles.includes(Roles.ROOT) ? (
                   <div className="card-actions justify-end">
                     <button className="btn" onClick={handleUserAction}>
@@ -67,12 +72,12 @@ export const UsersCard = () => {
                         : "Yo i am admin"}
                     </button>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           );
         })}
-      <Toaster />
+      {/* <Toaster /> */}
     </div>
   );
 };

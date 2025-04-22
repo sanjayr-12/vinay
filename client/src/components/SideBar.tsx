@@ -75,6 +75,9 @@ const SideBar = () => {
           <li onClick={() => navigate("/analysis")}>
             <a>Site Analysis</a>
           </li>
+          <li onClick={() => navigate("/updates")}>
+            <a>Updates</a>
+          </li>
           <li
             onClick={() => {
               navigate("/design");
@@ -82,10 +85,7 @@ const SideBar = () => {
           >
             <a>Design Details</a>
           </li>
-          <li onClick={()=>navigate("/updates")}>
-            <a>Updates</a>
-          </li>
-          <li onClick={()=>navigate("/interior")}>
+          <li onClick={() => navigate("/interior")}>
             <a>Interior Design</a>
           </li>
           <li

@@ -6,9 +6,6 @@ const HomeIntro = () => {
           <h1 className="text-4xl font-bold mb-4">
             Welcome to <span className="text-primary">SpecView</span>
           </h1>
-          <p className="text-lg italic mb-8 text-gray-600 dark:text-gray-400">
-            Smart Collaboration Between Engineers and Clients
-          </p>
 
           <p className="mb-6 text-gray-800 dark:text-gray-200">
             <strong>SpecView</strong> is a powerful, AI-enhanced platform that
