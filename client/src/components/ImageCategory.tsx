@@ -11,7 +11,7 @@ const ImageCategory = () => {
   };
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 flex-wrap">
       <div className="form-control">
         <label className="label cursor-pointer">
           <span className="label-text">Design</span>
