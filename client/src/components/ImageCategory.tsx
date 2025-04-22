@@ -1,6 +1,5 @@
 import { useImageCategoryStore } from "../store/Store";
 import { ImageCategoryEnum } from "../types/store.types";
-// import { useEffect } from "react";
 
 const ImageCategory = () => {
   const { category, setImageCategory } = useImageCategoryStore();
