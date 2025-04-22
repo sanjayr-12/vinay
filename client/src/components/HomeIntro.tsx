@@ -7,6 +7,8 @@ const HomeIntro = () => {
             Welcome to <span className="text-primary">SpecView</span>
           </h1>
 
+          <br />
+
           <p className="mb-6 text-gray-800 dark:text-gray-200">
             <strong>SpecView</strong> is a powerful, AI-enhanced platform that
             makes building design and project communication seamless. Whether
