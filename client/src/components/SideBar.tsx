@@ -63,38 +63,41 @@ const SideBar = () => {
           <li>
             <a onClick={() => navigate("/")}>Home</a>
           </li>
-          {users?.roles.includes(Roles.ROOT) && (
+          <div className="divider"></div>
+          <div className="flex flex-col gap-4">
+            {users?.roles.includes(Roles.ROOT) && (
+              <li
+                onClick={() => {
+                  navigate("/users");
+                }}
+              >
+                <a>Users</a>
+              </li>
+            )}
+            <li onClick={() => navigate("/analysis")}>
+              <a>Site Analysis</a>
+            </li>
+            <li onClick={() => navigate("/updates")}>
+              <a>Updates</a>
+            </li>
             <li
               onClick={() => {
-                navigate("/users");
+                navigate("/design");
               }}
             >
-              <a>Users</a>
+              <a>Design Details</a>
             </li>
-          )}
-          <li onClick={() => navigate("/analysis")}>
-            <a>Site Analysis</a>
-          </li>
-          <li onClick={() => navigate("/updates")}>
-            <a>Updates</a>
-          </li>
-          <li
-            onClick={() => {
-              navigate("/design");
-            }}
-          >
-            <a>Design Details</a>
-          </li>
-          <li onClick={() => navigate("/interior")}>
-            <a>Interior Design</a>
-          </li>
-          <li
-            onClick={() => {
-              navigate("/feedback");
-            }}
-          >
-            <a>Feedback</a>
-          </li>
+            <li onClick={() => navigate("/interior")}>
+              <a>Interior Design</a>
+            </li>
+            <li
+              onClick={() => {
+                navigate("/feedback");
+              }}
+            >
+              <a>Feedback</a>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
