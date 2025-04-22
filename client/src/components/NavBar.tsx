@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Upload from "./Upload";
 import Generate from "./Generate";
 import SideBar from "./SideBar";
+import UserInfo from "./UserInfo";
 
 const NavBar = () => {
   const user = useUserStore((state) => state.user);
@@ -71,7 +72,14 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
+              <li
+                onClick={() => {
+                  const modal = document.getElementById(
+                    "user_info_modal"
+                  ) as HTMLDialogElement;
+                  modal?.showModal();
+                }}
+              >
                 <a className="justify-between">Profile</a>
               </li>
               <li onClick={handleLogout}>
@@ -83,6 +91,7 @@ const NavBar = () => {
       </div>
       <Upload />
       <Generate />
+      <UserInfo />
     </>
   );
 };

@@ -23,7 +23,11 @@ export const logoutAPI = async () => {
   return response.data;
 };
 
-export const imageUpload = async (imageBase64: string, name: string, category:ImageCategoryEnum) => {
+export const imageUpload = async (
+  imageBase64: string,
+  name: string,
+  category: ImageCategoryEnum
+) => {
   const response = await axios.post(
     "/api/user/upload-img",
     { imageBase64, imageName: name, category },
@@ -35,9 +39,13 @@ export const imageUpload = async (imageBase64: string, name: string, category:Im
 };
 
 export const getImages = async (category: ImageCategoryEnum) => {
-  const response = await axios.post("/api/user/get-imgs", {category},{
-    withCredentials: true,
-  });
+  const response = await axios.post(
+    "/api/user/get-imgs",
+    { category },
+    {
+      withCredentials: true,
+    }
+  );
   return response.data;
 };
 
@@ -93,5 +101,10 @@ export const actionFeedBack = async (id: string) => {
 
 export const getAllUsers = async () => {
   const response = await axios.get("/api/user/all", { withCredentials: true });
+  return response.data;
+};
+
+export const getUserInfo = async () => {
+  const response = await axios.get("/api/user/info", { withCredentials: true });
   return response.data;
 };
