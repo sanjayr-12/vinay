@@ -23,7 +23,7 @@ export const imageUploadController = async (
     let requestSchema = Joi.object({
       imageBase64: Joi.string().min(1).required(),
       imageName: Joi.string().min(1).required(),
-      category: Joi.string().min(1).required()
+      category: Joi.string().min(1).required(),
     });
 
     let { error } = requestSchema.validate(req.body);
@@ -49,12 +49,12 @@ export const imageUploadController = async (
 export const getImageController = async (req: CustomRequest, res: Response) => {
   try {
     const requestSchema = Joi.object({
-      category: Joi.string().min(1).required()
-    })
-    const { error } = requestSchema.validate(req.body)
+      category: Joi.string().min(1).required(),
+    });
+    const { error } = requestSchema.validate(req.body);
     if (error) {
-      res.status(406).json({ status: "error", message: error.message })
-      return
+      res.status(406).json({ status: "error", message: error.message });
+      return;
     }
     const result = await userService.getImages(req.body.category);
     res.status(200).json({ status: "ok", images: result });
@@ -200,6 +200,19 @@ export const getAllUsersController = async (
   try {
     const data = await userService.getAllUsers();
     res.status(200).json({ status: "ok", data });
+    return;
+  } catch (error: any) {
+    res.status(503).json({ status: "error", message: error.message });
+  }
+};
+
+export const getUserInfoController = async (
+  req: CustomRequest,
+  res: Response
+) => {
+  try {
+    const userInfo = await userService.getUserInfo(String(req.userId));
+    res.status(200).json({ status: "ok", data: userInfo });
     return;
   } catch (error: any) {
     res.status(503).json({ status: "error", message: error.message });

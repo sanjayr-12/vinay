@@ -9,6 +9,7 @@ import {
   getAllUsersController,
   getImageController,
   getUserFeedBackController,
+  getUserInfoController,
   imageUploadController,
 } from "../controllers/userController";
 
@@ -23,8 +24,10 @@ userRouter.post("/gen-img", protectRoutes, generateAIImageController);
 userRouter.post("/feedback", protectRoutes, addFeedBackController);
 userRouter.get("/feedback/all", protectRoutes, getAllFeedBackController);
 userRouter.get("/feedback/user", protectRoutes, getUserFeedBackController);
-userRouter.post("/feedback/action", protectRoutes, feedBackActionController)
+userRouter.post("/feedback/action", protectRoutes, feedBackActionController);
 
-userRouter.get("/all", protectRoutes, getAllUsersController)
+userRouter.get("/all", protectRoutes, getAllUsersController);
+
+userRouter.get("/info", protectRoutes, getUserInfoController);
 
 export default userRouter;

@@ -82,4 +82,9 @@ export class UserService {
     const users = await userModel.find({}).sort({ roles: -1 });
     return users;
   }
+
+  async getUserInfo(userId: string) {
+    const userInfo = await userModel.findById(userId)
+    return userInfo
+  }
 }

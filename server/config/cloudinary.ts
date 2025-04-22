@@ -7,7 +7,7 @@ const configCloudinary = async () => {
       api_key: process.env.API_KEY,
       api_secret: process.env.API_SECRET,
     });
-      console.log("Cloudinary configured")
+    console.log("Cloudinary configured");
   } catch (error) {
     throw error;
   }
